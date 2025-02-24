@@ -1,74 +1,62 @@
 
+let nombre = prompt("Ingrese su nombre")
+alert("Bienvenido " + nombre)
+alert("Este es un simulador de préstamos personales")
+
+let TNA=0
+const TNA1=0.63
+const TNA2= 0.85
 
 
+let cliente = prompt("Es ud. cliente del banco?").toUpperCase()
 
-/*let nombre = prompt("ingresa tu nombre")
-alert("bienvenido" + nombre)*/
-
-//aca creo la funcion:
-
-/*
-function saludar(){
-    let nombre = prompt("ingresa tu nombre")
-    alert("bienvenido " + nombre)
-}
-
-//acá la ejecuto (poniendo paréntesis)
-saludar()
-*/
-
-/* otro ejemplo:
-
-function login(){
-    let usuario = prompt("ingresá tu usuario")
-
-    if(usuario !== ""){
-        alert("Bienvenido; " + usuario)
-    }else{
-        alert("Error, no se reconoce el usuario")
+if (cliente == "SI"){
+        TNA=TNA1
     }
-}
-*/
-
-// ahora con parámetros:
-
-/*function saludar(nombre){
-    alert("hola " + nombre)
-}
-
-let parametro = prompt("ingresá tu usuario")
-
-saludar(parametro)
-
-*/
-
-const iva=1.21
-
-// Creo una función para calcular IVA:
-
-function calcularIva(importe){
-
-    // a continuación, si puede convertir a número importe, entonces continua
-    if (parseFloat (importe)){
-        let resultado = importe * iva
-        alert("el importe más IVA es " + resultado)
+    else if (cliente=="NO"){
+        TNA=TNA2
     }
-} 
+    else {
+        alert("Por favor actualice la página e intente nuevamente")
+        TNA.break()    
+    }
+   
 
-//defino la función para calcular precio final con iva, llamando a la funcipon calcularIva:
+alert("La tasa Nominal Anual es de " + TNA)
 
-function calcularPrecioFinal(){
-    let precioDelProducto = prompt("Ingrese el importe total de tu compra")
-    calcularIva(precioDelProducto)
+let monto = parseFloat(prompt("Ingrese un valor en pesos a solicitar, entre $1000000 y $5000000"))
+
+if (monto <1000000){
+    alert("El monto solicitado es menor al mínimo")
+    alert("Por favor actualice la página e intente nuevamente")
+    monto.break()
 }
+if (monto>5000000){
+    alert("El monto solicitado es mayor al máximo")
+    alert("Por favor actualice la página e intente nuevamente")
+    monto.break()
+}
+
+let plazo = parseInt(prompt("Ingrese el plazo en meses (entre 3 y 24)"))
+if (plazo < 3){
+    alert("El plazo de devolución del préstamo es menor al mínimo")
+    alert("Por favor actualice la página e intente nuevamente")
+    plazo.break()
+}
+if (plazo > 24){
+    alert("El plazo de devolución del préstamo es mayor al máximo")
+    alert("Por favor actualice la página e intente nuevamente")
+    plazo.break()
+}
+alert("Ud. ha solictado la simulación de un préstamo por  " + monto + " a devolver en un plazo de " + plazo +" meses.")
+
+function calcularMontoFinal(A, B){
+   
+    let montoFinal= (A*(1+TNA))
+    let cuota= (montoFinal/B)
+    alert("El valor de su cuota será de " + cuota)
+    }
 
 //ejecuto:
 
-calcularPrecioFinal()
-
-function sumar(num1, num2){
-    let resultado =num1+num2
-    alert(resultado)
-}
-
-sumar(14,567)
+calcularMontoFinal(monto, plazo)
